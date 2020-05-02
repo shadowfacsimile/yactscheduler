@@ -25,4 +25,13 @@ public class YactScheduler {
 		LOGGER.info("***** Inside YactScheduler.syncCOVIDData() / Data synch completed *****");
 	}
 
+	@Scheduled(cron = "0 0 0 * * ?")
+	public void archiveCOVIDData() {
+		LOGGER.info("***** Inside YactScheduler.archiveCOVIDData() *****");
+
+		yactDataService.archiveCOVIDData();
+
+		LOGGER.info("***** Inside YactScheduler.archiveCOVIDData() / Archival completed *****");
+	}
+
 }

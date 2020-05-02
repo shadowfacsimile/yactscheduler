@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.MappingIterator;
@@ -70,5 +71,16 @@ public class YactDataService {
 	private void writeToJson(List<Map<?, ?>> data, File file) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.writeValue(file, data);
+	}
+
+	public void archiveCOVIDData() {
+		File source = new File("/home/facsimile/yactfiles/");
+		File dest = new File("/home/facsimile/yactarchivefiles/");
+
+		try {
+			FileUtils.copyDirectory(source, dest);
+		} catch (IOException e) {
+			LOGGER.severe("Error copying files : " + e.getMessage());
+		}
 	}
 }
